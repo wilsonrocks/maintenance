@@ -7,7 +7,8 @@ db = peewee.SqliteDatabase("jobs.db")
 class Category(peewee.Model):
     class Meta:
         database = db
-        name = peewee.CharField()
+
+    name = peewee.CharField(unique=True)
 
 class Job(peewee.Model):
     class Meta:
