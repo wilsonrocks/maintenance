@@ -1,6 +1,7 @@
 """Mainly for use when the database has been deleted:)"""
 
-import models
+from maintain import models
+
 
 #add some job categories
 for category in ("Purchase", "Repair", "Decorate", "Clean"):

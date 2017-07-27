@@ -1,11 +1,11 @@
 import flask
 
-import .models
+app = flask.Flask(__name__)
 
-import views
+from maintain import views
+from maintain import models
 
 database = models.db
-app = flask.Flask(__name__)
 
 @app.before_request
 def db_connect():
