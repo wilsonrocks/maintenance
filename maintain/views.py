@@ -1,3 +1,6 @@
+from flask import render_template
+
+
 from maintain import app
 
 from maintain import models
@@ -15,3 +18,6 @@ def all_tasks():
 
     return answer
 
+@app.route("/papa")
+def papa():
+    return render_template('all.html',  papa="PAPABAG")
