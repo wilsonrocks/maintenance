@@ -4,6 +4,11 @@ import peewee
 
 db = peewee.SqliteDatabase("jobs.db")
 
+class Category(peewee.Model):
+    class Meta:
+        database = db
+        name = peewee.CharField()
+
 class Job(peewee.Model):
     class Meta:
         database = db
@@ -12,6 +17,7 @@ class Job(peewee.Model):
     completed = peewee.DateField(null=True)
     info = peewee.CharField()
     part_of = peewee.ForeignKeyField('self', related_name = "parts", null=True)
+    category = peewee.ForeignKeyField(Category, related_name = "jobs")
 
     def __str__(self):
         return f"{self.info} (id={self.id})"
