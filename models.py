@@ -1,0 +1,29 @@
+import datetime
+
+import peewee
+
+db = peewee.SqliteDatabase("jobs.db")
+
+class Job(peewee.Model):
+    class Meta:
+        database = db
+
+    created = peewee.DateField(default=datetime.date.today())
+    completed = peewee.DateField(null=True)
+    info = peewee.CharField()
+    part_of = peewee.ForeignKeyField('self', related_name = "parts", null=True)
+
+    def __str__(self):
+        return f"{self.info} (id={self.id})"
+
+    def complete(self):
+        """
+        Helper to complete the current task. Uses the current date for the completion date.
+        """
+        self.completed = datetime.date.today()
+        self.save()
+
+    def time_active(self):
+        """ Returns how long the task took/how long it's been active. TO BE IMPLEMENTED"""
+        pass
+
