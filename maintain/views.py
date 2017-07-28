@@ -12,12 +12,4 @@ def root():
 
 @app.route("/all")
 def all_tasks():
-    answer = ""
-    for m in models.Job.select():
-        answer += "\n" + str(m)
-
-    return answer
-
-@app.route("/papa")
-def papa():
-    return render_template('all.html',  papa="PAPABAG")
+    return render_template("all.html", jobs=models.Job.select())
