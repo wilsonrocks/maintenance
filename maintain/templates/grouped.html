@@ -8,15 +8,27 @@
     {% for job in jobs %}
         {% if job.category.name|string() == category.name|string()%}
             {{job.info}} ({{job.created}})
-            <a class="pure-button pure-button-primary" href="#">
-                Complete
+            <a href="#">
+            <button type="button" class="btn btn-default">
+                  <span class="glyphicon glyphicon-ok"></span>
+                  
+            </button>
             </a>
-            <a class="pure-button" href="#">
-                Edit
+
+            <a href="#">
+            <button type="button" class="btn btn-default">
+                  <span class="glyphicon glyphicon-pencil"></span>
+                  
+            </button>
             </a>
-            <a class="pure-button" href="#">
-                Delete
+
+            <a href="#">
+            <button type="button" class="btn btn-default">
+                  <span class="glyphicon glyphicon-remove"></span>
+                  
+            </button>
             </a>
+
             <p>
         {% endif %}
     {% endfor %}
