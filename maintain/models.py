@@ -1,6 +1,8 @@
-import datetime
 
 import peewee
+from flask import url_for
+import datetime
+
 
 db = peewee.SqliteDatabase("jobs.db")
 
@@ -29,6 +31,12 @@ class Job(peewee.Model):
         """
         self.completed = datetime.date.today()
         self.save()
+
+    def complete_url(self):
+        """
+        Returns the URL for marking this task as completed.
+        """
+        return url_for('complete',id=self.id)
 
     def time_active(self):
         """ Returns how long the task took/how long it's been active. TO BE IMPLEMENTED"""

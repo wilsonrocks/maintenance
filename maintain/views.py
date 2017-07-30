@@ -12,3 +12,7 @@ def all_tasks():
     return render_template("grouped.html",
             jobs=models.Job.select(),
             categories=models.Category.select())
+
+@app.route("/complete/<id>")
+def complete(id):
+    return("Complete {}".format(id))

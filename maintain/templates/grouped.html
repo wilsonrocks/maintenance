@@ -8,7 +8,7 @@
     {% for job in jobs %}
         {% if job.category.name|string() == category.name|string()%}
             {{job.info}} ({{job.created}})
-            <a href="#">
+            <a href="{{job.complete_url()}}">
             <button type="button" class="btn btn-default">
                   <span class="glyphicon glyphicon-ok"></span>
                   
