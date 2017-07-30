@@ -1,0 +1,26 @@
+{% extends "base.html"%}
+{% block content %}
+
+{% for category in categories %}
+    <h2>
+        {{category.name}}
+    </h2>
+    {% for job in jobs %}
+        {% if job.category.name|string() == category.name|string()%}
+            {{job.info}} ({{job.created}})
+            <a class="pure-button pure-button-primary" href="#">
+                Complete
+            </a>
+            <a class="pure-button" href="#">
+                Edit
+            </a>
+            <a class="pure-button" href="#">
+                Delete
+            </a>
+            <p>
+        {% endif %}
+    {% endfor %}
+
+{% endfor %}
+
+{% endblock %}
