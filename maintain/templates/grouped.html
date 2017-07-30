@@ -1,38 +1,37 @@
 {% extends "base.html"%}
 {% block content %}
+<div class="container-fluid">
+    {% for category in categories %}
+        <h2>
+            {{category.name}}
+        </h2>
+        {% for job in jobs %}
+            {% if job.category.name|string() == category.name|string()%}
+                {{job.info}} ({{job.created}})
+                    <a href="{{job.complete_url()}}">
+                    <button type="button" class="btn btn-default">
+                          <span class="glyphicon glyphicon-ok"></span>
+                          
+                    </button>
+                    </a>
 
-{% for category in categories %}
-    <h2>
-        {{category.name}}
-    </h2>
-    {% for job in jobs %}
-        {% if job.category.name|string() == category.name|string()%}
-            {{job.info}} ({{job.created}})
-            <a href="{{job.complete_url()}}">
-            <button type="button" class="btn btn-default">
-                  <span class="glyphicon glyphicon-ok"></span>
-                  
-            </button>
-            </a>
+                    <a href="#">
+                    <button type="button" class="btn btn-default">
+                          <span class="glyphicon glyphicon-pencil"></span>
+                          
+                    </button>
+                    </a>
 
-            <a href="#">
-            <button type="button" class="btn btn-default">
-                  <span class="glyphicon glyphicon-pencil"></span>
-                  
-            </button>
-            </a>
+                    <a href="#">
+                    <button type="button" class="btn btn-default">
+                          <span class="glyphicon glyphicon-remove"></span>
+                          
+                    </button>
+                    </a>
+                <p>
+            {% endif %}
+        {% endfor %}
 
-            <a href="#">
-            <button type="button" class="btn btn-default">
-                  <span class="glyphicon glyphicon-remove"></span>
-                  
-            </button>
-            </a>
-
-            <p>
-        {% endif %}
     {% endfor %}
-
-{% endfor %}
-
+</div>
 {% endblock %}
