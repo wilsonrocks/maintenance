@@ -2,6 +2,7 @@ from flask import render_template
 
 from maintain import app
 from maintain import models
+from maintain.forms import CreateForm
 
 @app.route("/")
 def root():
@@ -37,6 +38,7 @@ def delete(id):
 def edit(id):
     return "EDITORY"
 
-@app.route("/create")
+@app.route("/create", methods=['GET', 'POST'])
 def create():
-    return "LET'S GET CREATIVE"
+    form = CreateForm()
+    return render_template('create.html', form=form)

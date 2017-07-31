@@ -1,7 +1,7 @@
 import flask
 
 app = flask.Flask(__name__)
-
+app.config["SECRET_KEY"] = "I love Shelley"
 from maintain import views
 from maintain import models
 
@@ -23,4 +23,5 @@ def test():
     return "WHAAAAAAAAAAAAAAAAT"
 
 if __name__ == "__main__":
+
     app.run(host="192.168.1.32", debug=True)
