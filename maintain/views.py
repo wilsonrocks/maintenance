@@ -17,7 +17,8 @@ def all():
 def todo():
     return render_template("grouped.html",
             jobs=models.Job.select().where(models.Job.completed == None),
-            categories=models.Category.select())
+            categories=models.Category.select(),
+            title="To Do List")
 
 
 @app.route("/complete/<id>")
@@ -28,7 +29,9 @@ def complete(id):
 
 @app.route("/delete/<id>")
 def delete(id):
-    return "DELETEATHON"
+    job = models.Job.get(models.Job.id==id)
+    job.delete_instance()
+    return "Deleted job #{}: {}".format(job.id,job.info)
 
 @app.route("/edit/<id>")
 def edit(id):
