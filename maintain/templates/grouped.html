@@ -1,13 +1,28 @@
 {% extends "base.html"%}
 {% block content %}
 <div class="container-fluid">
-    {% for category in categories %}
-        <h2>
-            {{category.name}}
-        </h2>
+
+        <table class="table">
+            <tr>
+                <th>Room</th>
+                <th>Category</th>
+                <th>Info</th>
+                <th>Created</th>
+                <th>Actions</th>
+            </tr>
+
         {% for job in jobs %}
-            {% if job.category.name|string() == category.name|string()%}
-                {{job.info}} ({{job.created}})
+
+
+            <tr>
+                <td>{{job.room.name}}</td>
+                <td>{{job.category.name}}</td>
+                <td>{{job.info}}</td>
+                <td>{{job.created}}</td>
+                
+                <td>
+
+
                     <a href="{{job.complete_url()}}">
                     <button type="button" class="btn btn-default">
                           <span class="glyphicon glyphicon-ok"></span>
@@ -28,10 +43,11 @@
                           
                     </button>
                     </a>
-                <p>
-            {% endif %}
-        {% endfor %}
+                </td>
+            </tr>
 
-    {% endfor %}
+        {% endfor %}
+        </table>
+
 </div>
 {% endblock %}
