@@ -41,4 +41,7 @@ def edit(id):
 @app.route("/create", methods=['GET', 'POST'])
 def create():
     form = CreateForm()
+    form.room.choices = [(i.id, i.name) for i in models.Room.select()]
+    form.category.choices = [(i.id, i.name) for i in models.Category.select()]
+    
     return render_template('create.html', form=form)
