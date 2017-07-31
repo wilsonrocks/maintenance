@@ -38,6 +38,12 @@ class Job(peewee.Model):
         """
         return url_for('complete',id=self.id)
 
+    def edit_url(self):
+        return url_for('edit',id=self.id)
+
+    def delete_url(self):
+        return url_for('delete',id=self.id)
+
     def time_active(self):
         """ Returns how long the task took/how long it's been active. TO BE IMPLEMENTED"""
         pass
