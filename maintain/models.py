@@ -1,10 +1,14 @@
-
 import peewee
 from flask import url_for
 import datetime
 
 
 db = peewee.SqliteDatabase("jobs.db")
+
+class Room(peewee.Model):
+    class Meta:
+        database = db
+    name = peewee.CharField(unique=True)
 
 class Category(peewee.Model):
     class Meta:
@@ -21,6 +25,7 @@ class Job(peewee.Model):
     info = peewee.CharField()
     part_of = peewee.ForeignKeyField('self', related_name = "parts", null=True)
     category = peewee.ForeignKeyField(Category, related_name = "jobs")
+    room = peewee.ForeignKeyField(Room, related_name = "jobs")
 
     def __str__(self):
         return f"{self.info} (id={self.id})"
@@ -47,4 +52,5 @@ class Job(peewee.Model):
     def time_active(self):
         """ Returns how long the task took/how long it's been active. TO BE IMPLEMENTED"""
         pass
+
 
