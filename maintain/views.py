@@ -1,4 +1,4 @@
-from flask import render_template
+from flask import render_template, redirect, request, url_for, flash
 
 from maintain import app
 from maintain import models
@@ -41,7 +41,18 @@ def edit(id):
 @app.route("/create", methods=['GET', 'POST'])
 def create():
     form = CreateForm()
+    #set up choices for the SelectFields by querying the database
     form.room.choices = [(i.id, i.name) for i in models.Room.select()]
     form.category.choices = [(i.id, i.name) for i in models.Category.select()]
-    
+
+    if request.method == 'POST' and form.validate():
+        room = models.Room.get(id=form.room.data)
+        category = models.Category.get(id=form.category.data)
+        new_job = models.Job.create(info=form.info.data,room=room,category=category)
+        flash("Created {} Job {}:\n{} in {}".format(new_job.category.name,
+            new_job.id,
+            new_job.info,
+            new_job.room.name))
+        return redirect(url_for('todo'))
+
     return render_template('create.html', form=form)

@@ -1,8 +1,8 @@
-from flask_wtf import Form
+from flask_wtf import FlaskForm
 from wtforms import StringField, SelectField
 from wtforms.validators import DataRequired
 
-class CreateForm(Form):
+class CreateForm(FlaskForm):
     info = StringField("info", validators=[DataRequired()])
-    room = SelectField("room", validators=[DataRequired()])
-    category = SelectField("category", validators=[DataRequired()])
+    room = SelectField("room",coerce=int)
+    category = SelectField("category", coerce=int)

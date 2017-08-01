@@ -1,10 +1,15 @@
 {% extends "base.html"%}
 {% block content %}
 
-<form action="" method="post" name="create">
-    Job Info: {{form.info}}<br>
+{% for error in form.info.errors %}
+info: {{error}}<br>
+{% endfor %}
+
+<form action="{{url_for('create')}}" method="post" name="create">
+    {{form.csrf_token}}
     Room: {{form.room}}<br>
     Category: {{form.category}}<br>
+    Job Info: {{form.info}}<br>
     <input type="submit" value="Create it!">
 </form>
 
