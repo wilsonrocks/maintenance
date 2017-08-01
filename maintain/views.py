@@ -6,7 +6,7 @@ from maintain.forms import CreateForm
 
 @app.route("/")
 def root():
-    return("Root of the App...")
+    return redirect("/todo")
 
 @app.route("/all")
 def all():
@@ -40,7 +40,10 @@ def todo():
 def complete(id):
     job = models.Job.get(models.Job.id==id)
     job.complete()
-    return "Completed job #{}: {}".format(job.id,job.info)
+
+    flash("Well done! Completed job #{}: {}".format(job.id,job.info))
+
+    return redirect("/todo")
 
 @app.route("/delete/<id>")
 def delete(id):
