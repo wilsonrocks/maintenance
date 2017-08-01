@@ -1,0 +1,19 @@
+Dear {{name}},
+
+{% if completed %}
+We did it!
+We completed these tasks this week:
+
+{% for job in completed %}
+{{job.room}} / {{job.info}}{% endfor %}
+{% else %}
+Sadly, we didn't complete any jobs this week:( So try to do some this next week!
+{% endif %}
+
+These jobs are still available:
+
+{% for job in incomplete %}
+{{job.room}} / {{job.category}} / {{job.info}}{% endfor %}
+
+Good Luck this week!
+XXXXX

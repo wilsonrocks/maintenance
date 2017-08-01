@@ -9,12 +9,18 @@ class Room(peewee.Model):
     class Meta:
         database = db
     name = peewee.CharField(unique=True)
+    
+    def __str__(self):
+        return self.name
 
 class Category(peewee.Model):
     class Meta:
         database = db
 
     name = peewee.CharField(unique=True)
+
+    def __str__(self):
+        return self.name
 
 class Job(peewee.Model):
     class Meta:
