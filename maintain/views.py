@@ -16,10 +16,24 @@ def all():
 
 @app.route("/todo")
 def todo():
+    to_do = (models.Job
+    .select()
+    .join(models.Room)
+    .switch(models.Job)
+    .join(models.Category)
+    .where(models.Job.completed == None)
+    .order_by(models.Room.name,
+        models.Category.name,
+        models.Job.created))
+            
+
+    return render_template('grouped.html', jobs=to_do, categories=models.Category.select(),title='To Do List')
+
     return render_template("grouped.html",
             jobs=models.Job.select().where(models.Job.completed == None),
             categories=models.Category.select(),
             title="To Do List")
+
 
 
 @app.route("/complete/<id>")
