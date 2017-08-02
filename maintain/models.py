@@ -5,6 +5,9 @@ import datetime
 
 db = peewee.SqliteDatabase("jobs.db")
 
+def jobs_count():
+    return Job.select().where(Job.completed == None).count()
+
 class Room(peewee.Model):
     class Meta:
         database = db

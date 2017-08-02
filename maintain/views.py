@@ -4,6 +4,7 @@ from maintain import app
 from maintain import models
 from maintain.forms import CreateForm
 
+
 @app.route("/")
 def root():
     return redirect("/todo")
@@ -27,12 +28,8 @@ def todo():
         models.Job.created))
             
 
-    return render_template('grouped.html', jobs=to_do, categories=models.Category.select(),title='To Do List')
+    return render_template('grouped.html', jobs=to_do, categories=models.Category.select(),title='To Do List',count=models.jobs_count())
 
-    return render_template("grouped.html",
-            jobs=models.Job.select().where(models.Job.completed == None),
-            categories=models.Category.select(),
-            title="To Do List")
 
 
 
@@ -73,3 +70,4 @@ def create():
         return redirect(url_for('todo'))
 
     return render_template('create.html', form=form)
+

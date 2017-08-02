@@ -30,7 +30,6 @@
     {% endfor %}
 {% endwith %}
 
-
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -59,6 +58,16 @@
             <li>
                 <a href="#">Completed</a>
             </li>
+
+
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+            {% if count %}
+                <li>
+                    <a href="#">{{count}} jobs left</a>
+                </li
+            {% endif %}
 
         </ul>
     </div>
