@@ -32,10 +32,6 @@
 
 <nav class="navbar navbar-default">
     <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">Maintain</a>
-        </div>
-
        <ul class="nav navbar-nav">
 
             <li>
@@ -43,31 +39,9 @@
             </li>
             
             <li>
-                <a href="{{url_for("todo")}}">To Do</a>
+                <a href="{{url_for("todo")}}">To Do{%if count%}({{count}}){%endif%}</a>
 
             </li>
-
-            <li>
-                <a href="{{url_for("all")}}">All</a>
-            </li>
-
-            <li>
-                <a href="#">Printable</a>
-            </li>
-
-            <li>
-                <a href="#">Completed</a>
-            </li>
-
-
-        </ul>
-
-        <ul class="nav navbar-nav navbar-right">
-            {% if count %}
-                <li>
-                    <a href="#">{{count}} jobs left</a>
-                </li
-            {% endif %}
 
         </ul>
     </div>
