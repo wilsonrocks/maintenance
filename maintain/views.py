@@ -41,7 +41,6 @@ def todo():
 def complete(id):
     job = Job.get(Job.id==id)
     job.complete()
-
     flash("Well done! Completed job #{}: {}".format(job.id,job.info))
 
     return redirect("/todo")
@@ -50,11 +49,8 @@ def complete(id):
 def delete(id):
     job = Job.get(Job.id==id)
     job.delete_instance()
-    return "Deleted job #{}: {}".format(job.id,job.info)
 
-@app.route("/edit/<id>")
-def edit(id):
-    return "EDITORY"
+    return "Deleted job #{}: {}".format(job.id,job.info)
 
 @app.route("/create", methods=['GET', 'POST'])
 def create():
@@ -74,4 +70,3 @@ def create():
         return redirect(url_for('todo'))
 
     return render_template('create.html', form=form)
-
