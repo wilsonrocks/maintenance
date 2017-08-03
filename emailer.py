@@ -4,12 +4,14 @@ import smtplib
 
 from jinja2 import Template
 
+import sys
+sys.path.append('/home/dad/maintenance')
 from maintain.models import Job, Room, Category
 import secrets
 
 message = EmailMessage(policy=default)
 
-with open('maintain/templates/email.template') as template_file:
+with open('/home/dad/maintenance/maintain/templates/email.template') as template_file:
     template = Template(template_file.read())
     message.set_content(template.render(
         name="James",
@@ -18,7 +20,7 @@ with open('maintain/templates/email.template') as template_file:
         ))
 
 message['From'] = secrets.FROM_ADDR
-message['To'] = ["oh.that.wilson@googlemail.com", "shelleybullas@googlemail.com"]
+message['To'] = ["oh.that.wilson@googlemail.com"]#, "shelleybullas@googlemail.com"]
 message['Subject'] = "Jobs done this week!"
 
 print(message.as_string())
