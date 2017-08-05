@@ -29,7 +29,7 @@ class Job(peewee.Model):
     class Meta:
         database = db
 
-    created = peewee.DateField(default=datetime.date.today())
+    created = peewee.DateField(default=peewee.datetime.date.today())
     completed = peewee.DateField(null=True)
     info = peewee.CharField()
     part_of = peewee.ForeignKeyField('self', related_name = "parts", null=True)
@@ -43,7 +43,7 @@ class Job(peewee.Model):
         """
         Helper to complete the current task. Uses the current date for the completion date.
         """
-        self.completed = datetime.date.today()
+        self.completed = peewee.datetime.date.today()
         self.save()
 
     def complete_url(self):
@@ -54,9 +54,3 @@ class Job(peewee.Model):
 
     def delete_url(self):
         return url_for('delete',id=self.id)
-
-    def completed_this_week(self):
-        try:
-            return True if (peewee.datetime.datetime.now() - self.completed) <= datetime.timedelta(days=7) else False
-        except TypeError:
-            return False
