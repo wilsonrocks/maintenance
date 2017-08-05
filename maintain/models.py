@@ -3,7 +3,7 @@ from flask import url_for
 import datetime
 
 
-db = peewee.SqliteDatabase("jobs.db")
+db = peewee.SqliteDatabase("/home/dad/maintenance/jobs.db")
 
 def jobs_count():
     return Job.select().where(Job.completed == None).count()
@@ -37,7 +37,7 @@ class Job(peewee.Model):
     room = peewee.ForeignKeyField(Room, related_name = "jobs")
 
     def __str__(self):
-        return f"{self.info} (id={self.id})"
+        return "{} (id={})".format(self.info,self.id)
 
     def complete(self):
         """
@@ -52,14 +52,11 @@ class Job(peewee.Model):
         """
         return url_for('complete',id=self.id)
 
-    def edit_url(self):
-        return url_for('edit',id=self.id)
-
     def delete_url(self):
         return url_for('delete',id=self.id)
 
-    def time_active(self):
-        """ Returns how long the task took/how long it's been active. TO BE IMPLEMENTED"""
-        pass
-
-
+    def completed_this_week(self):
+        try:
+            return True if (peewee.datetime.datetime.now() - self.completed) <= datetime.timedelta(days=7) else False
+        except TypeError:
+            return False

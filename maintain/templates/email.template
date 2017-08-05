@@ -1,4 +1,4 @@
-Dear {{name}},
+Hiya!
 
 {% if completed %}
 We did it!
